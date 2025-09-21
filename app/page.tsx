@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import Image from "next/image"
 import {
   Server,
   Users,
@@ -486,12 +485,12 @@ export default function MaintenancePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 relative pulse-glow hover:scale-110 transition-transform duration-300">
-                <Image
+                <img
                   src="/images/hd-logo.png"
                   alt="HD CINEMA Logo"
-                  width={48}
-                  height={48}
-                  className="object-contain"
+                  width="48"
+                  height="48"
+                  className="object-contain w-full h-full"
                 />
               </div>
               <div>
@@ -706,12 +705,12 @@ export default function MaintenancePage() {
             <div className="slide-in-left">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-8 h-8 relative hover:scale-110 transition-transform duration-300">
-                  <Image
+                  <img
                     src="/images/hd-logo.png"
                     alt="HD CINEMA Logo"
-                    width={32}
-                    height={32}
-                    className="object-contain"
+                    width="32"
+                    height="32"
+                    className="object-contain w-full h-full"
                   />
                 </div>
                 <h4 className="text-xl font-bold">HD CINEMA</h4>
