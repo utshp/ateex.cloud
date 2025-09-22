@@ -43,25 +43,51 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
     return () => clearInterval(timer)
   }, [targetDate])
 
-  const timeUnits = [
-    { label: "Days", value: timeLeft.days },
-    { label: "Hours", value: timeLeft.hours },
-    { label: "Minutes", value: timeLeft.minutes },
-    { label: "Seconds", value: timeLeft.seconds },
-  ]
-
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-      {timeUnits.map((unit, index) => (
-        <div key={unit.label} className="text-center">
-          <div className="bg-card border border-border rounded-lg p-4 md:p-6 mb-2">
-            <div className="text-3xl md:text-5xl font-bold text-primary cinema-glow font-mono">
-              {unit.value.toString().padStart(2, "0")}
+    <div className="text-center">
+      <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-6">
+        {/* Days Box */}
+        <div className="flex flex-col items-center">
+          <div className="bg-black/80 border-2 border-red-900/50 rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[120px] shadow-2xl backdrop-blur-sm">
+            <div className="text-3xl md:text-5xl font-bold text-red-500 cinema-glow font-mono tracking-wider">
+              {timeLeft.days.toString().padStart(2, "0")}
             </div>
           </div>
-          <div className="text-sm md:text-base text-muted-foreground uppercase tracking-wider">{unit.label}</div>
+          <div className="text-xs md:text-sm text-gray-400 uppercase tracking-wider mt-2 font-semibold">DAYS</div>
         </div>
-      ))}
+
+        {/* Hours Box */}
+        <div className="flex flex-col items-center">
+          <div className="bg-black/80 border-2 border-red-900/50 rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[120px] shadow-2xl backdrop-blur-sm">
+            <div className="text-3xl md:text-5xl font-bold text-red-500 cinema-glow font-mono tracking-wider">
+              {timeLeft.hours.toString().padStart(2, "0")}
+            </div>
+          </div>
+          <div className="text-xs md:text-sm text-gray-400 uppercase tracking-wider mt-2 font-semibold">HOURS</div>
+        </div>
+
+        {/* Minutes Box */}
+        <div className="flex flex-col items-center">
+          <div className="bg-black/80 border-2 border-red-900/50 rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[120px] shadow-2xl backdrop-blur-sm">
+            <div className="text-3xl md:text-5xl font-bold text-red-500 cinema-glow font-mono tracking-wider">
+              {timeLeft.minutes.toString().padStart(2, "0")}
+            </div>
+          </div>
+          <div className="text-xs md:text-sm text-gray-400 uppercase tracking-wider mt-2 font-semibold">MINUTES</div>
+        </div>
+
+        {/* Seconds Box */}
+        <div className="flex flex-col items-center">
+          <div className="bg-black/80 border-2 border-red-900/50 rounded-xl p-4 md:p-6 min-w-[80px] md:min-w-[120px] shadow-2xl backdrop-blur-sm">
+            <div className="text-3xl md:text-5xl font-bold text-red-500 cinema-glow font-mono tracking-wider">
+              {timeLeft.seconds.toString().padStart(2, "0")}
+            </div>
+          </div>
+          <div className="text-xs md:text-sm text-gray-400 uppercase tracking-wider mt-2 font-semibold">SECONDS</div>
+        </div>
+      </div>
+
+      <div className="text-sm md:text-base text-muted-foreground uppercase tracking-wider">Time Remaining</div>
     </div>
   )
 }

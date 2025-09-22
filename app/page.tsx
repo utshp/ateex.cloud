@@ -26,7 +26,7 @@ export default function MaintenancePage() {
           </div>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 text-pretty leading-relaxed">
-            {"We're upgrading our systems to bring you an even better movie experience. "}
+            {"We're upgrading all servers to bring you an even better movie experience. "}
             {"Our team is working hard to get everything ready for you."}
           </p>
 
@@ -34,14 +34,14 @@ export default function MaintenancePage() {
           <div className="mb-8">
             <div className="flex items-center justify-center gap-2 mb-6">
               <Clock className="w-6 h-6 text-primary" />
-              <h3 className="text-xl md:text-2xl font-semibold">Back Online In:</h3>
+              <h3 className="text-xl md:text-2xl font-semibold">Maintenance Ends In:</h3>
             </div>
-            <CountdownTimer targetDate="2025-09-25T00:00:00" />
+            <CountdownTimer targetDate="2025-09-25T00:00:00+05:30" />
           </div>
 
           {/* Additional Info */}
           <div className="text-muted-foreground">
-            <p className="mb-2">{"Expected completion: September 25, 2025"}</p>
+            <p className="mb-2">{"Expected completion: September 25, 2025 (India Time)"}</p>
             <p className="text-sm">{"Thank you for your patience. We can't wait to welcome you back!"}</p>
           </div>
         </Card>
@@ -51,7 +51,7 @@ export default function MaintenancePage() {
           <p className="text-sm">{"For urgent inquiries, please contact our support team"}</p>
           <div className="flex items-center justify-center gap-4 mt-4">
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-xs uppercase tracking-wider">System Status: Maintenance Mode</span>
+            <span className="text-xs uppercase tracking-wider">System Status: All Servers Upgrading</span>
             <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
           </div>
         </div>
