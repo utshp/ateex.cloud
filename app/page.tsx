@@ -34,6 +34,7 @@ interface TimeLeft {
 export default function MaintenancePage() {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [mounted, setMounted] = useState(false)
+  const [serverLoads, setServerLoads] = useState<{ [key: number]: number }>({})
 
   const targetDate = new Date("2025-09-25T00:00:00Z").getTime()
 
@@ -54,10 +55,24 @@ export default function MaintenancePage() {
       }
     }
 
-    calculateTimeLeft()
-    const timer = setInterval(calculateTimeLeft, 1000)
+    const updateServerLoads = () => {
+      const newLoads: { [key: number]: number } = {}
+      for (let i = 1; i <= 24; i++) {
+        newLoads[i] = Math.floor(Math.random() * 3) // 0-2% load
+      }
+      setServerLoads(newLoads)
+    }
 
-    return () => clearInterval(timer)
+    calculateTimeLeft()
+    updateServerLoads()
+
+    const timer = setInterval(calculateTimeLeft, 1000)
+    const loadTimer = setInterval(updateServerLoads, 5000)
+
+    return () => {
+      clearInterval(timer)
+      clearInterval(loadTimer)
+    }
   }, [targetDate])
 
   if (!mounted) {
@@ -203,111 +218,100 @@ export default function MaintenancePage() {
       id: 8,
       name: "Player Server 1",
       type: "player",
-      location: "India",
-      flag: "🇮🇳",
+      location: "Singapore",
+      flag: "🇸🇬",
       status: "maintenance",
-      uptime: "99.8%",
-      load: "74%",
+      uptime: "Maintenance",
     },
     {
       id: 9,
       name: "Player Server 2",
       type: "player",
-      location: "Bangladesh",
-      flag: "🇧🇩",
+      location: "India",
+      flag: "🇮🇳",
       status: "maintenance",
-      uptime: "99.6%",
-      load: "41%",
+      uptime: "Maintenance",
     },
     {
       id: 10,
       name: "Player Server 3",
       type: "player",
-      location: "Singapore",
-      flag: "🇸🇬",
+      location: "USA",
+      flag: "🇺🇸",
       status: "maintenance",
-      uptime: "99.7%",
-      load: "33%",
+      uptime: "Maintenance",
     },
     {
       id: 11,
       name: "Player Server 4",
       type: "player",
-      location: "USA",
-      flag: "🇺🇸",
+      location: "Germany",
+      flag: "🇩🇪",
       status: "maintenance",
-      uptime: "99.9%",
-      load: "18%",
+      uptime: "Maintenance",
     },
     {
       id: 12,
       name: "Player Server 5",
       type: "player",
-      location: "Germany",
-      flag: "🇩🇪",
+      location: "Finland",
+      flag: "🇫🇮",
       status: "maintenance",
-      uptime: "99.5%",
-      load: "55%",
+      uptime: "Maintenance",
     },
     {
       id: 13,
       name: "Player Server 6",
       type: "player",
-      location: "Finland",
-      flag: "🇫🇮",
+      location: "Canada",
+      flag: "🇨🇦",
       status: "maintenance",
-      uptime: "99.8%",
-      load: "42%",
+      uptime: "Maintenance",
     },
     {
       id: 14,
       name: "Player Server 7",
       type: "player",
-      location: "Canada",
-      flag: "🇨🇦",
+      location: "Brazil",
+      flag: "🇧🇷",
       status: "maintenance",
-      uptime: "99.6%",
-      load: "37%",
+      uptime: "Maintenance",
     },
     {
       id: 15,
       name: "Player Server 8",
       type: "player",
-      location: "Brazil",
-      flag: "🇧🇷",
+      location: "United Kingdom",
+      flag: "🇬🇧",
       status: "maintenance",
-      uptime: "99.7%",
-      load: "48%",
+      uptime: "Maintenance",
     },
     {
       id: 16,
       name: "Player Server 9",
       type: "player",
-      location: "United Kingdom",
-      flag: "🇬🇧",
+      location: "Australia",
+      flag: "🇦🇺",
       status: "maintenance",
-      uptime: "99.9%",
-      load: "35%",
+      uptime: "Maintenance",
     },
     {
       id: 17,
       name: "Player Server 10",
       type: "player",
-      location: "Australia",
-      flag: "🇦🇺",
+      location: "Japan",
+      flag: "🇯🇵",
       status: "maintenance",
-      uptime: "99.4%",
-      load: "62%",
+      uptime: "Maintenance",
     },
     {
       id: 18,
       name: "Player Server 11",
       type: "player",
-      location: "Japan",
-      flag: "🇯🇵",
+      location: "South Korea",
+      flag: "🇰🇷",
       status: "maintenance",
-      uptime: "99.8%",
-      load: "28%",
+      uptime: "Maintenance",
     },
   ]
 
@@ -427,6 +431,7 @@ export default function MaintenancePage() {
   const ServerCard = ({ server, index }: { server: any; index: number }) => {
     const ServerIcon = getServerIcon(server.type)
     const serverColor = getServerTypeColor(server.type)
+    const currentLoad = serverLoads[server.id] || 0
 
     return (
       <Card
@@ -436,7 +441,11 @@ export default function MaintenancePage() {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center group-hover:bg-red-500/30 transition-colors duration-300">
-              <ServerIcon className={`w-5 h-5 ${serverColor} transition-colors duration-300`} />
+              {server.type === "player" && server.flag ? (
+                <span className="text-2xl">{server.flag}</span>
+              ) : (
+                <ServerIcon className={`w-5 h-5 ${serverColor} transition-colors duration-300`} />
+              )}
             </div>
             <div>
               <h4 className="font-semibold group-hover:text-red-400 transition-colors duration-300">
@@ -445,7 +454,6 @@ export default function MaintenancePage() {
               <p className="text-sm text-muted-foreground">{server.name}</p>
               {server.type === "player" && server.location && (
                 <div className="flex items-center space-x-1 mt-1">
-                  <span className="text-lg">{server.flag}</span>
                   <span className="text-xs text-muted-foreground">{server.location}</span>
                 </div>
               )}
@@ -466,11 +474,11 @@ export default function MaintenancePage() {
         <div className="space-y-3">
           <div className="flex items-center justify-between pt-2 border-t border-border/50">
             <span className="text-sm text-muted-foreground">Uptime</span>
-            <span className="text-sm font-medium text-green-400">{server.uptime}</span>
+            <span className="text-sm font-medium text-yellow-400">{server.uptime || "Maintenance"}</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Load</span>
-            <span className="text-sm font-medium text-yellow-400">{server.load}</span>
+            <span className="text-sm font-medium text-green-400">{currentLoad}%</span>
           </div>
         </div>
       </Card>
@@ -524,9 +532,8 @@ export default function MaintenancePage() {
           </h2>
 
           <p className="text-xl text-muted-foreground mb-12 max-w-4xl mx-auto text-pretty fade-in-up stagger-1 leading-relaxed">
-            We're upgrading our infrastructure with comprehensive network updates, high-performance SSD installations,
-            VPS optimizations, critical bug fixes, enhanced mobile UI experience, and implementing cutting-edge live
-            match & TV streaming capabilities to deliver the ultimate entertainment platform.
+            We're upgrading our infrastructure with network updates, SSD changes, VPS improvements, bug fixes, mobile UI
+            enhancements, and adding live match & TV streaming capabilities.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 fade-in-up stagger-2">
@@ -550,7 +557,7 @@ export default function MaintenancePage() {
 
             <div className="text-center mb-6">
               <div className="text-2xl font-bold text-red-500 font-mono animate-pulse">
-                {timeLeft.days}Days {timeLeft.hours}Hours {timeLeft.minutes}Minutes {timeLeft.seconds}Seconds
+                {timeLeft.days}Days{timeLeft.hours}Hours{timeLeft.minutes}Minutes{timeLeft.seconds}Seconds
               </div>
             </div>
 
@@ -637,8 +644,8 @@ export default function MaintenancePage() {
           <div className="text-center mb-12 fade-in-up">
             <h3 className="text-4xl font-bold mb-4 font-playfair">Server Infrastructure</h3>
             <p className="text-xl text-muted-foreground mb-8">
-              Our 24 specialized servers across global locations are undergoing comprehensive maintenance to deliver the
-              ultimate streaming experience
+              All 11 high-performance AMD-powered servers are undergoing comprehensive maintenance including network
+              updates, SSD upgrades, VPS improvements, and system optimizations
             </p>
           </div>
 
