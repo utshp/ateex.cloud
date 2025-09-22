@@ -1,31 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
+import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-})
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-})
-
 export const metadata: Metadata = {
-  title: "HD CINEMA - Site Maintenance",
-  description: "HD CINEMA is currently undergoing maintenance to enhance your streaming experience",
-  generator: "HD CINEMA",
+  title: "HD CINEMA - Under Maintenance",
+  description: "HD CINEMA is currently under maintenance. We'll be back soon with an enhanced movie experience.",
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -35,8 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`font-sans ${inter.variable} ${jetbrainsMono.variable} ${playfair.variable}`}>
-        <Suspense fallback={null}>{children}</Suspense>
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <Analytics />
       </body>
     </html>
   )
