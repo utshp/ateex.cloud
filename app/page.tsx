@@ -436,7 +436,7 @@ export default function MaintenancePage() {
     return (
       <Card
         key={server.id}
-        className={`p-6 bg-card/50 backdrop-blur-sm border-border/50 transition-all duration-300 group`}
+        className={`p-6 bg-card/50 backdrop-blur-sm border-gray-800 transition-all duration-300 group`}
       >
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
@@ -472,7 +472,7 @@ export default function MaintenancePage() {
         </div>
 
         <div className="space-y-3">
-          <div className="flex items-center justify-between pt-2 border-t border-border/50">
+          <div className="flex items-center justify-between pt-2 border-t border-gray-800">
             <span className="text-sm text-muted-foreground">Uptime</span>
             <span className="text-sm font-medium text-yellow-400">{server.uptime || "Maintenance"}</span>
           </div>
@@ -488,7 +488,7 @@ export default function MaintenancePage() {
   return (
     <div className="min-h-screen bg-background grid-bg">
       {/* Header */}
-      <header className="border-b border-border/50 backdrop-blur-sm bg-background/80 sticky top-0 z-50 slide-in-left">
+      <header className="border-b border-gray-800 backdrop-blur-sm bg-background/80 sticky top-0 z-50 slide-in-left">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -547,7 +547,7 @@ export default function MaintenancePage() {
           </div>
 
           {/* Countdown Timer */}
-          <Card className="max-w-2xl mx-auto p-8 bg-card/50 backdrop-blur-sm border-border/50 scale-in stagger-3 hover:bg-card/70 transition-all duration-500">
+          <Card className="max-w-2xl mx-auto p-8 bg-card/50 backdrop-blur-sm border-gray-800 scale-in stagger-3 hover:bg-card/70 transition-all duration-500">
             <div className="flex items-center justify-center mb-4">
               <Calendar className="w-6 h-6 text-red-500 mr-2" />
               <h3 className="text-xl font-semibold">Maintenance End Date</h3>
@@ -591,7 +591,7 @@ export default function MaintenancePage() {
             {serverStats.map((stat, index) => (
               <Card
                 key={index}
-                className={`p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/70 hover:scale-105 transition-all duration-500 fade-in-up stagger-${index + 1} group`}
+                className={`p-6 bg-card/50 backdrop-blur-sm border-gray-800 hover:bg-card/70 hover:scale-105 transition-all duration-500 fade-in-up stagger-${index + 1} group`}
               >
                 <div className="flex flex-col items-center text-center">
                   <stat.icon
@@ -622,7 +622,7 @@ export default function MaintenancePage() {
             {improvements.map((item, index) => (
               <Card
                 key={index}
-                className={`p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/70 hover:scale-105 transition-all duration-500 group scale-in stagger-${(index % 6) + 1}`}
+                className={`p-6 bg-card/50 backdrop-blur-sm border-gray-800 hover:bg-card/70 hover:scale-105 transition-all duration-500 group scale-in stagger-${(index % 6) + 1}`}
               >
                 <div className="text-center">
                   <item.icon
@@ -706,7 +706,7 @@ export default function MaintenancePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 border-t border-border/50 fade-in-up">
+      <footer className="py-16 px-6 border-t border-gray-800 fade-in-up">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             <div className="slide-in-left">
@@ -751,7 +751,7 @@ export default function MaintenancePage() {
             </div>
           </div>
 
-          <div className="text-center pt-8 border-t border-border/50 fade-in-up stagger-2">
+          <div className="text-center pt-8 border-t border-gray-800 fade-in-up stagger-2">
             <div className="flex items-center justify-center mb-4">
               <span className="text-muted-foreground mr-2">Made with</span>
               <span className="text-red-500 animate-pulse">❤</span>
